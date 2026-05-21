@@ -1,0 +1,144 @@
+# Skills
+
+Gosh! This is like the best collection of Claude Code skills ever made. Probably the best anyone's ever seen. I'm not even joking. These skills have like incredible capabilities and stuff. If you don't use them you're basically an idiot.
+
+## The Skills
+
+### exploratory-data-analysis
+
+This skill does like a flippin' sweet analysis of scientific data files. It handles over 200 file formats which is like way more than anyone at school can handle. Chemistry, bioinformatics, microscopy, spectroscopy, proteomics, metabolomics — whatever. It just detects the file type automatically and generates these detailed markdown reports. Pretty much the best thing since tots.
+
+**Origin:** K-Dense Inc.
+**License:** MIT
+
+---
+
+### manuscript-review
+
+This one was made by me. By myself. With my own hands. It reviews scientific manuscripts like Reviewer 2 on a bad day — misses nothing, pulls no punches. It checks logic, rhetoric, statistical accuracy, style, and flow. Especially good at neuroimaging manuscripts with LME, GAM, FDR, or sensitivity analyses. It's probably my best work. Like my drawings of a liger.
+
+**Origin:** Michael Romano (that's me, gosh)
+**License:** Not specified
+
+---
+
+### scientific-schematics
+
+This creates publication-quality scientific diagrams using Nano Banana 2 AI. Yes that's the real name. It uses Gemini 3.1 Pro Preview for quality review and only regenerates if the quality is below threshold which is like pretty freakin' smart. Does neural network architectures, system diagrams, flowcharts, biological pathways. Uncle Rico couldn't even throw a football this accurately.
+
+**Origin:** K-Dense Inc.
+**License:** MIT
+
+---
+
+### seaborn
+
+Statistical visualization with pandas integration. Makes like these really sweet box plots, violin plots, pair plots, and heatmaps with attractive defaults so you don't have to spend a million hours making your charts look good. Built on matplotlib which is basically its older brother.
+
+**Origin:** K-Dense Inc. (skill), Seaborn library by Michael Waskom
+**License:** BSD-3-Clause
+
+---
+
+### pydicom
+
+Works with DICOM files which is like the format for all medical imaging. CT scans, MRIs, X-rays, ultrasound — whatever your bones need, this skill handles it. Reading, writing, modifying, anonymizing, extracting pixel data. If you need to do anything with medical images and you DON'T use this skill, you're probably like the worst doctor ever.
+
+**Origin:** K-Dense Inc. (skill), pydicom library: https://github.com/pydicom/pydicom
+**License:** https://github.com/pydicom/pydicom/blob/main/LICENSE
+
+---
+
+### infographics
+
+Creates professional infographics using Nano Banana Pro AI with Gemini 3 Pro for quality review and Perplexity Sonar for research. It supports 10 infographic types, 8 industry styles, and colorblind-safe palettes. No design skills required which is lucky because some people have like zero artistic talent. Not me though. I'm pretty good at drawing.
+
+**Origin:** Not specified (no author metadata)
+**License:** Not specified
+
+---
+
+### statistical-analysis
+
+Guided statistical analysis that helps you pick the right tests for your data. Does assumption checking, power analysis, and APA-formatted results. If you're like "which test do I use?" this skill is basically your spirit animal. For implementing specific models programmatically you'd want statsmodels instead. Gosh.
+
+**Origin:** K-Dense Inc.
+**License:** MIT
+
+---
+
+### pptx
+
+Any time a .pptx file is involved in like ANY way, this skill fires up. Creating decks, reading them, editing them, whatever. It's got scripts for cleaning, adding slides, thumbnails, and even full Office XML schema validation. This thing is like the wolverine of presentation skills. Anthropic made it so you KNOW it's got like government-level engineering.
+
+**Origin:** Anthropic, PBC
+**License:** Proprietary (All rights reserved, no derivative works, no redistribution)
+
+---
+
+### matplotlib
+
+The low-level plotting library for when you need like total control over every single element in your plot. Full customization. Every pixel. It's for people who are serious about their craft, like how I'm serious about my nunchuck skills. Exports to PNG, PDF, and SVG for publication.
+
+**Origin:** K-Dense Inc. (skill), matplotlib library: https://github.com/matplotlib/matplotlib
+**License:** https://github.com/matplotlib/matplotlib/tree/main/LICENSE
+
+---
+
+### scientific-visualization
+
+This is like the meta-skill. The big boss. It orchestrates matplotlib, seaborn, AND plotly together to make publication-ready figures with multi-panel layouts, significance annotations, error bars, colorblind-safe palettes, and specific journal formatting for Nature, Science, Cell, and basically every journal that matters.
+
+**Origin:** K-Dense Inc.
+**License:** MIT
+
+---
+
+### polars
+
+A lightning-fast DataFrame library that's way faster than pandas. Uses lazy evaluation and parallel execution with an Apache Arrow backend. Best for datasets between 1-100GB. It's like if pandas went to a dojo and trained for like a thousand years and came back as a freakin' warrior.
+
+**Origin:** K-Dense Inc. (skill), Polars library: https://github.com/pola-rs/polars
+**License:** https://github.com/pola-rs/polars/blob/main/LICENSE
+
+---
+
+### statsmodels
+
+Statistical models library with specific model classes like OLS, GLM, mixed models, and ARIMA. Gives you detailed diagnostics, residuals, and inference. Best for econometrics, time series, and rigorous inference with coefficient tables. This skill knows more about statistics than anyone at my school. Probably more than my mom's boyfriend too.
+
+**Origin:** K-Dense Inc. (skill), statsmodels library: BSD-3-Clause
+**License:** BSD-3-Clause
+
+---
+
+### superpowers (submodule)
+
+This is like THE skill framework. The whole enchilada. Made by Jesse Vincent. It's got brainstorming, test-driven development, systematic debugging, parallel agents, code review, git worktrees — basically everything you need to be a competent developer which is more than most people can say. It's a registered git submodule pointing to `git@github.com:obra/superpowers`. Version 5.1.0. Do whatever you want with it.
+
+**Origin:** Jesse Vincent (github.com/obra/superpowers)
+**License:** MIT
+
+---
+
+## Summary Table
+
+| Skill | Author/Origin | License |
+|-------|--------------|---------|
+| exploratory-data-analysis | K-Dense Inc. | MIT |
+| manuscript-review | Michael Romano | Not specified |
+| scientific-schematics | K-Dense Inc. | MIT |
+| seaborn | K-Dense Inc. | BSD-3-Clause |
+| pydicom | K-Dense Inc. | pydicom license |
+| infographics | Not specified | Not specified |
+| statistical-analysis | K-Dense Inc. | MIT |
+| pptx | Anthropic, PBC | Proprietary |
+| matplotlib | K-Dense Inc. | matplotlib license |
+| scientific-visualization | K-Dense Inc. | MIT |
+| polars | K-Dense Inc. | Polars license |
+| statsmodels | K-Dense Inc. | BSD-3-Clause |
+| superpowers | Jesse Vincent | MIT |
+
+---
+
+*Peace out.*
