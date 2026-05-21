@@ -111,6 +111,69 @@ Statistical models library with specific model classes like OLS, GLM, mixed mode
 
 ---
 
+### python-clean-code
+
+The complete Clean Code reference for Python. Like the whole enchilada from Robert C. Martin's Chapter 17 — naming, functions, comments, DRY, boundary conditions. It's like a flippin' encyclopedia of how to not write garbage code. If you only pick one clean code skill this is the one because it's got everything. It's like a complete meal.
+
+**Origin:** Ertugrul Demir (github.com/ertugrul-dmr/clean-code-skills)
+**License:** MIT
+
+---
+
+### boy-scout
+
+"Always leave the campground cleaner than you found it." That's the Boy Scout Rule. This skill makes sure that every time you touch Python code you leave it a little better than before. It orchestrates the other clean code skills as needed. It's like having a really responsible friend who picks up trash at the park. Except for code.
+
+**Origin:** Ertugrul Demir (github.com/ertugrul-dmr/clean-code-skills)
+**License:** MIT
+
+---
+
+### clean-comments
+
+Enforces Clean Code principles for Python comments and docstrings. No metadata in comments, no redundancy, no commented-out code. If your comment just says what the code already says, this skill will be like "delete that, idiot." It's basically Reviewer 2 but for comments specifically.
+
+**Origin:** Ertugrul Demir (github.com/ertugrul-dmr/clean-code-skills)
+**License:** MIT
+
+---
+
+### clean-functions
+
+Enforces Clean Code principles for Python functions. Maximum 3 arguments, single responsibility, no flag parameters. If your function takes like 7 arguments and does 12 things, this skill is gonna have a pretty serious talk with you. Like when your mom finds out you failed a class.
+
+**Origin:** Ertugrul Demir (github.com/ertugrul-dmr/clean-code-skills)
+**License:** MIT
+
+---
+
+### clean-general
+
+The core Clean Code principles — DRY, single responsibility, clear intent, no magic numbers, proper abstractions. Catches duplicated logic, magic numbers, long if/elif chains, chained property access like `a.b.c.d`, and clever one-liners that nobody can understand. It's like the hall monitor of your codebase.
+
+**Origin:** Ertugrul Demir (github.com/ertugrul-dmr/clean-code-skills)
+**License:** MIT
+
+---
+
+### clean-names
+
+Enforces Clean Code naming principles. Descriptive names, appropriate length, no encodings, no Hungarian notation. If you name your variable `d` or `x` or `proc`, this skill will look at you like you just said something really stupid. Which you did. Name your variables like a grown-up.
+
+**Origin:** Ertugrul Demir (github.com/ertugrul-dmr/clean-code-skills)
+**License:** MIT
+
+---
+
+### clean-tests
+
+Enforces Clean Code principles for Python tests. Fast tests, boundary coverage, one assert per test. If you only test the happy path this skill will be like "what about the sad path? What about when the input is empty? Did you even think about that?" It's pretty thorough.
+
+**Origin:** Ertugrul Demir (github.com/ertugrul-dmr/clean-code-skills)
+**License:** MIT
+
+---
+
 ## Submodules
 
 These are like imported from other repos. Git submodules. Pretty advanced stuff, you probably wouldn't understand.
@@ -139,6 +202,13 @@ This is like THE skill framework. The whole enchilada. Made by Jesse Vincent. It
 | scientific-visualization | Others | K-Dense Inc. | MIT |
 | polars | Others | K-Dense Inc. | Polars license |
 | statsmodels | Others | K-Dense Inc. | BSD-3-Clause |
+| python-clean-code | Others | Ertugrul Demir | MIT |
+| boy-scout | Others | Ertugrul Demir | MIT |
+| clean-comments | Others | Ertugrul Demir | MIT |
+| clean-functions | Others | Ertugrul Demir | MIT |
+| clean-general | Others | Ertugrul Demir | MIT |
+| clean-names | Others | Ertugrul Demir | MIT |
+| clean-tests | Others | Ertugrul Demir | MIT |
 | superpowers | Submodule | Jesse Vincent | MIT |
 
 ---
