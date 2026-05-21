@@ -1,5 +1,31 @@
 # Skills
 
+```
+        ___
+       /   \
+      | o o |
+      |  >  |
+      | \_/ |
+       \___/
+      __|_|__
+     /       \
+    | VOTE 4  |
+    | PEDRO   |
+     \_______/
+        | |
+       /| |\
+      / | | \
+     /  | |  \
+    /   | |   \
+   /    | |    \
+  |_____|_|_____|
+        | |
+       _| |_
+      |     |
+      |     |
+      |_____|
+```
+
 Gosh! This is like the best collection of Claude Code skills ever made. Probably the best anyone's ever seen. I'm not even joking. These skills have like incredible capabilities and stuff. If you don't use them you're basically an idiot.
 
 ---
