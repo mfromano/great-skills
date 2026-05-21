@@ -143,4 +143,18 @@ This is like THE skill framework. The whole enchilada. Made by Jesse Vincent. It
 
 ---
 
+## Recommended Proprietary Skills
+
+These skills are like really good but I can't just give them to you because they have licenses that say you can't redistribute them. It's like how you can't just take someone's tots even if they're delicious. You gotta get them yourself through the proper channels. Gosh.
+
+### pptx
+
+The ultimate PowerPoint skill. Handles reading, creating, editing, and validating .pptx files with full Office XML schema support. It's got like government-level engineering because Anthropic made it. If you work with slide decks at all you basically need this.
+
+**Origin:** Anthropic, PBC
+**License:** Proprietary (All rights reserved — no redistribution, no derivative works)
+**How to access:** Available through Claude Code's built-in skill registry. Run `claude mcp` or check Anthropic's official skill distributions. You get it by just using Claude Code like a normal person — it comes with the service. Don't ask me to give you my copy because that's literally illegal or whatever.
+
+---
+
 *Peace out.*
