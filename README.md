@@ -75,15 +75,6 @@ Guided statistical analysis that helps you pick the right tests for your data. D
 
 ---
 
-### pptx
-
-Any time a .pptx file is involved in like ANY way, this skill fires up. Creating decks, reading them, editing them, whatever. It's got scripts for cleaning, adding slides, thumbnails, and even full Office XML schema validation. This thing is like the wolverine of presentation skills. Anthropic made it so you KNOW it's got like government-level engineering.
-
-**Origin:** Anthropic, PBC
-**License:** Proprietary (All rights reserved, no derivative works, no redistribution)
-
----
-
 ### matplotlib
 
 The low-level plotting library for when you need like total control over every single element in your plot. Full customization. Every pixel. It's for people who are serious about their craft, like how I'm serious about my nunchuck skills. Exports to PNG, PDF, and SVG for publication.
@@ -144,7 +135,6 @@ This is like THE skill framework. The whole enchilada. Made by Jesse Vincent. It
 | pydicom | Others | K-Dense Inc. | pydicom license |
 | infographics | Others | Not specified | Not specified |
 | statistical-analysis | Others | K-Dense Inc. | MIT |
-| pptx | Others | Anthropic, PBC | Proprietary |
 | matplotlib | Others | K-Dense Inc. | matplotlib license |
 | scientific-visualization | Others | K-Dense Inc. | MIT |
 | polars | Others | K-Dense Inc. | Polars license |
