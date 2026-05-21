@@ -2,16 +2,11 @@
 
 Gosh! This is like the best collection of Claude Code skills ever made. Probably the best anyone's ever seen. I'm not even joking. These skills have like incredible capabilities and stuff. If you don't use them you're basically an idiot.
 
-## The Skills
-
-### exploratory-data-analysis
-
-This skill does like a flippin' sweet analysis of scientific data files. It handles over 200 file formats which is like way more than anyone at school can handle. Chemistry, bioinformatics, microscopy, spectroscopy, proteomics, metabolomics — whatever. It just detects the file type automatically and generates these detailed markdown reports. Pretty much the best thing since tots.
-
-**Origin:** K-Dense Inc.
-**License:** MIT
-
 ---
+
+## My Skills
+
+These ones I made myself. With my own hands. Like a craft.
 
 ### manuscript-review
 
@@ -19,6 +14,19 @@ This one was made by me. By myself. With my own hands. It reviews scientific man
 
 **Origin:** Michael Romano (that's me, gosh)
 **License:** Not specified
+
+---
+
+## Other People's Skills
+
+These were made by other people who are also pretty good at stuff I guess. Not as good as me but whatever.
+
+### exploratory-data-analysis
+
+This skill does like a flippin' sweet analysis of scientific data files. It handles over 200 file formats which is like way more than anyone at school can handle. Chemistry, bioinformatics, microscopy, spectroscopy, proteomics, metabolomics — whatever. It just detects the file type automatically and generates these detailed markdown reports. Pretty much the best thing since tots.
+
+**Origin:** K-Dense Inc.
+**License:** MIT
 
 ---
 
@@ -112,7 +120,11 @@ Statistical models library with specific model classes like OLS, GLM, mixed mode
 
 ---
 
-### superpowers (submodule)
+## Submodules
+
+These are like imported from other repos. Git submodules. Pretty advanced stuff, you probably wouldn't understand.
+
+### superpowers
 
 This is like THE skill framework. The whole enchilada. Made by Jesse Vincent. It's got brainstorming, test-driven development, systematic debugging, parallel agents, code review, git worktrees — basically everything you need to be a competent developer which is more than most people can say. It's a registered git submodule pointing to `git@github.com:obra/superpowers`. Version 5.1.0. Do whatever you want with it.
 
@@ -123,21 +135,21 @@ This is like THE skill framework. The whole enchilada. Made by Jesse Vincent. It
 
 ## Summary Table
 
-| Skill | Author/Origin | License |
-|-------|--------------|---------|
-| exploratory-data-analysis | K-Dense Inc. | MIT |
-| manuscript-review | Michael Romano | Not specified |
-| scientific-schematics | K-Dense Inc. | MIT |
-| seaborn | K-Dense Inc. | BSD-3-Clause |
-| pydicom | K-Dense Inc. | pydicom license |
-| infographics | Not specified | Not specified |
-| statistical-analysis | K-Dense Inc. | MIT |
-| pptx | Anthropic, PBC | Proprietary |
-| matplotlib | K-Dense Inc. | matplotlib license |
-| scientific-visualization | K-Dense Inc. | MIT |
-| polars | K-Dense Inc. | Polars license |
-| statsmodels | K-Dense Inc. | BSD-3-Clause |
-| superpowers | Jesse Vincent | MIT |
+| Skill | Category | Author/Origin | License |
+|-------|----------|--------------|---------|
+| manuscript-review | Mine | Michael Romano | Not specified |
+| exploratory-data-analysis | Others | K-Dense Inc. | MIT |
+| scientific-schematics | Others | K-Dense Inc. | MIT |
+| seaborn | Others | K-Dense Inc. | BSD-3-Clause |
+| pydicom | Others | K-Dense Inc. | pydicom license |
+| infographics | Others | Not specified | Not specified |
+| statistical-analysis | Others | K-Dense Inc. | MIT |
+| pptx | Others | Anthropic, PBC | Proprietary |
+| matplotlib | Others | K-Dense Inc. | matplotlib license |
+| scientific-visualization | Others | K-Dense Inc. | MIT |
+| polars | Others | K-Dense Inc. | Polars license |
+| statsmodels | Others | K-Dense Inc. | BSD-3-Clause |
+| superpowers | Submodule | Jesse Vincent | MIT |
 
 ---
 
