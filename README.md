@@ -41,6 +41,20 @@ This one was made by me. By myself. With my own hands. It reviews scientific man
 **Origin:** Michael Romano (that's me, gosh)
 **License:** Not specified
 
+### code-audit
+
+This is like an x-ray machine for Python code. It builds the whole call graph using AST — like totally deterministic, no hallucinations — then sends in four specialist agents to find bugs, design smells, security holes, and performance issues. Every finding has an exact line number. You navigate the code like a tree and it shows you what's wrong at each node. It's pretty much the most thorough code review ever. Like Uncle Rico's football tape but for functions.
+
+**Origin:** Michael Romano
+**License:** Not specified
+
+### functional-first
+
+Functions are like the best. Classes are fine I guess but only if they just store config and don't go around mutating stuff behind your back like some kind of secret agent. This skill makes sure your Python AND R code stays functional-first — pure functions, explicit arguments, return values instead of side effects. It's basically the coding equivalent of voting for Pedro: simple, honest, gets the job done.
+
+**Origin:** Michael Romano
+**License:** Not specified
+
 ---
 
 ## Other People's Skills
