@@ -1,6 +1,9 @@
 ---
 name: code-audit
 description: Interactive, deterministic code audit. Walks through a Python file function-by-function using AST-derived call graphs, with parallel specialist agents providing findings anchored to exact line numbers. Use when auditing code for bugs, reviewing Claude-generated code, or performing a thorough code walkthrough.
+license: MIT
+metadata:
+  skill-author: Michael Romano
 ---
 
 # Code Audit Skill
