@@ -1,6 +1,9 @@
 ---
 name: functional-first
 description: Use when writing, refactoring, or reviewing Python or R code. Enforces functional-first style — pure functions as default, classes only as configured namespaces. Triggers on class hierarchies, mutable state, R6/S4 usage, global assignment (<<-), or questions like "should this be a class".
+license: MIT
+metadata:
+  skill-author: Michael Romano
 ---
 
 # Functional-First Style

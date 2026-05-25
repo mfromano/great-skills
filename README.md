@@ -55,6 +55,13 @@ Functions are like the best. Classes are fine I guess but only if they just stor
 **Origin:** Michael Romano
 **License:** Not specified
 
+### r-statistical-modeling
+
+This one is like the law around here. When you need a statistical model — mixed effects, GAMs, GLMMs, whatever — you use R. Not Python. R has mgcv, lme4, lmerTest, emmeans, and like a million other packages that actually know what a Satterthwaite approximation is. Python statsmodels is fine for like... descriptive stats I guess. But for real inference? R. Always R. It's not even a debate. It's like asking if a liger could beat a regular lion. Obviously yes.
+
+**Origin:** Michael Romano
+**License:** Not specified
+
 ---
 
 ## Other People's Skills
@@ -231,7 +238,10 @@ This is like THE skill framework. The whole enchilada. Made by Jesse Vincent. It
 
 | Skill | Category | Author/Origin | License |
 |-------|----------|--------------|---------|
-| manuscript-review | Mine | Michael Romano | Not specified |
+| manuscript-review | Mine | Michael Romano | MIT |
+| r-statistical-modeling | Mine | Michael Romano | MIT |
+| code-audit | Mine | Michael Romano | MIT |
+| functional-first | Mine | Michael Romano | MIT |
 | exploratory-data-analysis | Others | K-Dense Inc. | MIT |
 | scientific-schematics | Others | K-Dense Inc. | MIT |
 | seaborn | Others | K-Dense Inc. | BSD-3-Clause |

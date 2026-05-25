@@ -1,6 +1,9 @@
 ---
 name: manuscript-review
 description: Use when reviewing a scientific manuscript (.docx) for logic, rhetoric, statistical accuracy, style, and flow. Especially neuroimaging manuscripts with LME, GAM, FDR, or sensitivity analyses. Triggers on any request to critique, review, or provide feedback on a paper draft.
+license: MIT
+metadata:
+  skill-author: Michael Romano
 ---
 
 # Manuscript Review
