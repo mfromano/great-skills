@@ -160,4 +160,4 @@ Analyze every function. Return your findings as a JSON array.`
 })
 ```
 
-Launch all 4 agents in parallel (single message with multiple Agent tool calls).
+By default, launch only the Logic agent. Only add Design, Security, or Performance agents if the user explicitly requests those categories.

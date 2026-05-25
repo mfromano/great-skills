@@ -42,16 +42,19 @@ Parse the JSON output. This gives you:
 
 ### Step 2: Dispatch Specialist Agents
 
-Launch **4 agents in parallel** using the Agent tool. Each agent receives:
+By default, launch **only the Logic agent**. Add other agents only if explicitly requested.
+
+| Agent | When to include |
+|-------|----------------|
+| **Logic** | Always (default) |
+| **Design** | Only if user asks for design/refactoring review |
+| **Security** | Only if user asks for security review |
+| **Performance** | Only if user asks for performance review |
+
+Each agent receives:
 1. The full file content (line-numbered, via Read tool output)
 2. The call graph JSON (for execution context)
 3. Their specialist prompt (see `agent-prompts.md`)
-
-Agent types:
-- **Logic** — correctness, edge cases, off-by-one, missing checks
-- **Design** — coupling, cohesion, naming, complexity, dead code
-- **Security** — injection, path traversal, unsafe operations, data exposure
-- **Performance** — O(n²) patterns, redundant I/O, unnecessary copies
 
 Each agent MUST return findings as a JSON array:
 ```json
