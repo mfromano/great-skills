@@ -39,6 +39,24 @@ R's statistical ecosystem (mgcv, lme4, lmerTest, nlme, emmeans) is more mature, 
 | `glmmTMB` | Zero-inflated, hurdle, and complex GLMMs |
 | `broom.mixed` | Tidy model output for mixed models |
 
+## r-btw MCP Server
+
+The `r-btw` MCP server (`btw::btw_mcp_server()`) exposes R objects, data frames, and documentation directly to Claude without requiring file round-trips. Use it when it is available.
+
+**When to use r-btw tools instead of `Rscript`:**
+- Inspecting a data frame's structure, column types, or summary stats before fitting a model
+- Checking a fitted model object (coefficients, random effects, convergence warnings) after fitting
+- Looking up R function or package documentation mid-task
+- Iterating on model specification when you need to examine intermediate objects
+
+**Typical workflow with r-btw:**
+1. Use r-btw tools to explore the data (column names, N, distributions, missing values)
+2. Write and run the model script with `Rscript`
+3. Use r-btw tools to inspect the fitted object or load diagnostics back into context
+4. Refine as needed
+
+If r-btw tools are not responding or the server is not connected, fall back to `Rscript` with `print()`/`summary()` and capture output directly.
+
 ## Running R Code
 
 Use `Rscript -e '...'` for single expressions, or write to a `.R` file and run with `Rscript file.R`. For multi-line scripts:
