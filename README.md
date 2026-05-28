@@ -41,6 +41,13 @@ This one was made by me. By myself. With my own hands. It reviews scientific man
 **Origin:** Michael Romano (that's me, gosh)
 **License:** MIT
 
+### zotero-enrich
+
+Enriches Obsidian literature notes imported from Zotero with two things: a clickable `[Open PDF](file://...)` link that opens the paper in your system viewer, and a Claude-generated summary written from the full PDF text (not just the abstract). Runs against `~/research/enrich_obsidian_notes.py` which sources credentials from `~/.config/settings.sh` automatically. Idempotent — safe to re-run after every batch of new papers.
+
+**Origin:** Michael Romano
+**License:** MIT
+
 ### auto-commit
 
 This one stages your files, drafts a commit message from the diff, and pushes to upstream. Just say "commit and push" or "ship it" and it figures out what changed and writes the message for you. Never touches your .env files or force-pushes to main. It's like having a responsible friend who always remembers to save their work. Unlike some people I know.
