@@ -43,6 +43,29 @@ R's statistical ecosystem (mgcv, lme4, lmerTest, nlme, emmeans) is more mature, 
 
 The `r-btw` MCP server (`btw::btw_mcp_server()`) exposes R objects, data frames, and documentation directly to Claude without requiring file round-trips. Use it when it is available.
 
+### Installation
+
+If the `r-btw` MCP server is not connected or the `btw` package is missing, install it:
+
+```r
+install.packages("btw", repos="https://cran.r-project.org")
+```
+
+Then add to `.mcp.json` (project-level) or `~/.claude/settings.json` (global):
+
+```json
+{
+  "mcpServers": {
+    "r-btw": {
+      "command": "Rscript",
+      "args": ["-e", "btw::btw_mcp_server()"]
+    }
+  }
+}
+```
+
+Reload/restart Claude Code after adding the entry. The `-32000` error on connection means the server process failed to start — most often because `btw` is not installed.
+
 **When to use r-btw tools instead of `Rscript`:**
 - Inspecting a data frame's structure, column types, or summary stats before fitting a model
 - Checking a fitted model object (coefficients, random effects, convergence warnings) after fitting
