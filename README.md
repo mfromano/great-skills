@@ -39,28 +39,35 @@ These ones I made myself. With my own hands. Like a craft.
 This one was made by me. By myself. With my own hands. It reviews scientific manuscripts like Reviewer 2 on a bad day — misses nothing, pulls no punches. It checks logic, rhetoric, statistical accuracy, style, and flow. Especially good at neuroimaging manuscripts with LME, GAM, FDR, or sensitivity analyses. It's probably my best work. Like my drawings of a liger.
 
 **Origin:** Michael Romano (that's me, gosh)
-**License:** Not specified
+**License:** MIT
+
+### auto-commit
+
+This one stages your files, drafts a commit message from the diff, and pushes to upstream. Just say "commit and push" or "ship it" and it figures out what changed and writes the message for you. Never touches your .env files or force-pushes to main. It's like having a responsible friend who always remembers to save their work. Unlike some people I know.
+
+**Origin:** Michael Romano
+**License:** MIT
 
 ### code-audit
 
 This is like an x-ray machine for Python code. It builds the whole call graph using AST — like totally deterministic, no hallucinations — then sends in four specialist agents to find bugs, design smells, security holes, and performance issues. Every finding has an exact line number. You navigate the code like a tree and it shows you what's wrong at each node. It's pretty much the most thorough code review ever. Like Uncle Rico's football tape but for functions.
 
 **Origin:** Michael Romano
-**License:** Not specified
+**License:** MIT
 
 ### functional-first
 
 Functions are like the best. Classes are fine I guess but only if they just store config and don't go around mutating stuff behind your back like some kind of secret agent. This skill makes sure your Python AND R code stays functional-first — pure functions, explicit arguments, return values instead of side effects. It's basically the coding equivalent of voting for Pedro: simple, honest, gets the job done.
 
 **Origin:** Michael Romano
-**License:** Not specified
+**License:** MIT
 
 ### r-statistical-modeling
 
 This one is like the law around here. When you need a statistical model — mixed effects, GAMs, GLMMs, whatever — you use R. Not Python. R has mgcv, lme4, lmerTest, emmeans, and like a million other packages that actually know what a Satterthwaite approximation is. Python statsmodels is fine for like... descriptive stats I guess. But for real inference? R. Always R. It's not even a debate. It's like asking if a liger could beat a regular lion. Obviously yes.
 
 **Origin:** Michael Romano
-**License:** Not specified
+**License:** MIT
 
 ---
 
@@ -242,6 +249,7 @@ This is like THE skill framework. The whole enchilada. Made by Jesse Vincent. It
 | r-statistical-modeling | Mine | Michael Romano | MIT |
 | code-audit | Mine | Michael Romano | MIT |
 | functional-first | Mine | Michael Romano | MIT |
+| auto-commit | Mine | Michael Romano | MIT |
 | exploratory-data-analysis | Others | K-Dense Inc. | MIT |
 | scientific-schematics | Others | K-Dense Inc. | MIT |
 | seaborn | Others | K-Dense Inc. | BSD-3-Clause |
