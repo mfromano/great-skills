@@ -5,6 +5,19 @@ when_to_use: Any time a statistical model is being created, fitted, or analyzed 
 license: MIT
 metadata:
   skill-author: Michael Romano
+hooks:
+  PostToolUse:
+    - matcher: "Edit|Write"
+      hooks:
+        - type: command
+          command: "/home/mromano/.claude/skills/r-statistical-modeling/hooks/r-post-edit.sh"
+          timeout: 10000
+  PreToolUse:
+    - matcher: "mcp__r-btw"
+      hooks:
+        - type: command
+          command: "/home/mromano/.claude/skills/r-statistical-modeling/hooks/r-session-summary.sh"
+          timeout: 6000
 ---
 
 # R-First Statistical Modeling
@@ -25,8 +38,23 @@ R's statistical ecosystem (mgcv, lme4, lmerTest, nlme, emmeans) is more mature, 
 
 ## Core Packages
 
+### Data Manipulation — tidyverse first
+
+**Always use tidyverse for data manipulation.** Prefer `dplyr`, `tidyr`, `purrr`, `stringr`, and `forcats` over base R equivalents. This means:
+
+- `dplyr::filter()`, `mutate()`, `select()`, `group_by()`, `summarise()` — not `subset()`, `transform()`, `aggregate()`
+- `tidyr::pivot_longer()`, `pivot_wider()`, `separate()`, `nest()` — not `reshape()`, `melt()`/`dcast()`
+- `purrr::map()`, `map_dfr()`, `walk()` — not `lapply()`, `sapply()`, `do.call(rbind, ...)`
+- `stringr::str_detect()`, `str_replace()` — not `grep()`, `gsub()`
+- `forcats::fct_relevel()`, `fct_reorder()` — not manual `factor(levels=...)`
+- `readr::read_csv()` — not `read.csv()`
+- Pipe-based workflows with `|>` or `%>%`
+
+Load `library(tidyverse)` at the top of every script. For scripts that only need one or two tidyverse packages, loading the full tidyverse is still preferred for consistency.
+
 | Package | Purpose |
 |---------|---------|
+| `tidyverse` | Core data manipulation, reading, and visualization (dplyr, tidyr, ggplot2, readr, purrr, stringr, forcats, tibble) |
 | `lme4` | Linear and generalized linear mixed-effects models |
 | `lmerTest` | Satterthwaite/Kenward-Roger df and p-values for lmer |
 | `mgcv` | GAMs, GAMMs, tensor interactions, penalized regression |
@@ -38,6 +66,8 @@ R's statistical ecosystem (mgcv, lme4, lmerTest, nlme, emmeans) is more mature, 
 | `DHARMa` | Residual diagnostics for GLMMs via simulation |
 | `glmmTMB` | Zero-inflated, hurdle, and complex GLMMs |
 | `broom.mixed` | Tidy model output for mixed models |
+| `gt` | Publication-quality tables for model results and diagnostics |
+| `gtsummary` | Model summary tables (tbl_regression, tbl_merge) |
 
 ## r-btw MCP Server
 
@@ -86,21 +116,30 @@ Use `Rscript -e '...'` for single expressions, or write to a `.R` file and run w
 
 ```bash
 Rscript -e '
+library(tidyverse)
 library(lme4)
 library(lmerTest)
-data(sleepstudy)
-fit <- lmer(Reaction ~ Days + (Days | Subject), data=sleepstudy)
-print(summary(fit))
+
+sleepstudy |>
+  mutate(Days_z = scale(Days)[, 1]) |>
+  lmer(Reaction ~ Days_z + (Days_z | Subject), data = _) |>
+  summary() |>
+  print()
 '
 ```
 
 For scripts that produce plots, save to file:
 
 ```r
-library(ggplot2)
-pdf("plot.pdf", width=8, height=6)
-# ... plotting code ...
-dev.off()
+library(tidyverse)
+
+p <- df |>
+  ggplot(aes(x = age, y = outcome, color = group)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "gam") +
+  theme_minimal()
+
+ggsave("plot.pdf", p, width = 8, height = 6)
 ```
 
 ## Model Recipes
@@ -108,40 +147,51 @@ dev.off()
 ### Linear Mixed-Effects Model (lmer)
 
 ```r
+library(tidyverse)
 library(lme4)
 library(lmerTest)
 
-fit <- lmer(outcome ~ fixed1 + fixed2 + (1 + fixed1 | subject), data=df)
+df_model <- df |>
+  filter(!is.na(outcome), !is.na(fixed1)) |>
+  mutate(fixed1_z = scale(fixed1)[, 1])
+
+fit <- lmer(outcome ~ fixed1_z + fixed2 + (1 + fixed1_z | subject), data = df_model)
 summary(fit)           # Satterthwaite p-values
-anova(fit, type=3)     # Type III ANOVA table
+anova(fit, type = 3)   # Type III ANOVA table
 confint(fit)           # Profile confidence intervals
 ```
 
 ### Generalized Additive Model (mgcv)
 
 ```r
+library(tidyverse)
 library(mgcv)
 
+df_gam <- df |>
+  filter(!is.na(y), !is.na(age)) |>
+  mutate(group = factor(group))
+
 # Smooth nonlinear effects
-fit <- gam(y ~ s(age) + s(time) + group + s(age, by=group), data=df)
+fit <- gam(y ~ s(age) + s(time) + group + s(age, by = group), data = df_gam)
 summary(fit)
-plot(fit, pages=1)
+plot(fit, pages = 1)
 
 # With random effects (GAMM via re= or bs="re")
-fit <- gam(y ~ s(age) + s(subject, bs="re"), data=df)
+fit <- gam(y ~ s(age) + s(subject, bs = "re"), data = df_gam)
 
 # Or use gamm() for nlme-style random effects
-fit <- gamm(y ~ s(age), random=list(subject=~1), data=df)
+fit <- gamm(y ~ s(age), random = list(subject = ~1), data = df_gam)
 ```
 
 ### GAMM with large datasets (bam)
 
 ```r
+library(tidyverse)
 library(mgcv)
 
 # bam() is faster for large datasets, supports discrete=TRUE
-fit <- bam(y ~ s(age) + s(subject, bs="re") + group,
-           data=df, discrete=TRUE)
+fit <- bam(y ~ s(age) + s(subject, bs = "re") + group,
+           data = df_gam, discrete = TRUE)
 ```
 
 ### Generalized Linear Mixed Model
@@ -192,27 +242,53 @@ anova(fit_reduced, fit_full)   # likelihood ratio test
 AICc(fit_full, fit_reduced)    # corrected AIC
 ```
 
-## Visualization Requirements
+## Visualization and Reporting Requirements
 
-**Every statistical analysis must produce two plots:**
+**Every statistical analysis must produce two plots AND gt tables:**
 
 1. **Raw data plot** — Show the raw data going into the analysis. This means the actual observed values, plotted in a way that conveys the structure of the data (e.g., scatter plots, spaghetti plots for longitudinal data, jittered points by group). No model fits, no smoothers — just the data.
 
 2. **Result overlay plot** — Show the analysis result (fitted values, smooth curves, predicted means, confidence bands) overlaid on top of the same raw data. The reader should be able to see both what the data look like and what the model estimates.
 
-Both plots should use the same axis scales and structure so they are directly comparable. Save them as separate files or as panels in a combined figure when appropriate.
+3. **gt tables** — Model statistics (fixed effects, smooth terms) and diagnostics (R², AIC, ICC) presented as publication-quality `gt` tables saved as `.pdf` and `.png`. See the "Reporting Results — gt Tables" section for details.
+
+Both plots should use the same axis scales and structure so they are directly comparable. Save them as separate files or as panels in a combined figure when appropriate. Tables are saved to the same output directory as figures.
+
+### Plot style — keep it simple
+
+**Default to the simplest plot that communicates the result.** Prefer:
+
+- **Scatter plot + regression line** for continuous × continuous relationships
+- **Box-and-whisker plot** (or violin + jitter) for group comparisons
+- **Point + error bar** for estimated means / contrasts
+- **Scatter + smooth line** (`geom_smooth`) for nonlinear trends
+
+**Avoid** unless the data genuinely requires it:
+- Spaghetti plots (use only for longitudinal data where individual trajectories matter)
+- Faceted multi-panel grids (use only when comparing across >2 grouping variables)
+- Density ridgelines, heatmaps, or complex geoms
+- Heavy annotation, arrows, or text labels on plots
+
+**Guiding principles:**
+- One geom layer for data, one for the model fit. Two layers is usually enough.
+- Let the data speak — if a scatter + `geom_smooth(method="lm")` tells the story, don't add confidence ribbons, rug plots, and marginal densities.
+- Use `alpha` for overplotting, `color` or `shape` for groups — not both simultaneously.
+- `theme_minimal()` or `theme_classic()` as default. No grey backgrounds.
+- Label axes clearly with units. No title unless the figure appears without a caption.
+
+**Preferred patterns by analysis type:**
+
+- **Continuous predictor (lm, GAM)**: `geom_point(alpha=0.4) + geom_smooth(method=...)` — scatter with fitted line/curve.
+- **Group comparison (ANOVA, t-test)**: `geom_boxplot() + geom_jitter(width=0.2, alpha=0.3)` — boxes show distribution, jitter shows individual observations.
+- **Interaction (2 groups × continuous)**: `geom_point(aes(color=group)) + geom_smooth(aes(color=group), method="lm")` — one regression line per group.
+- **Longitudinal (mixed model)**: `geom_point(alpha=0.3) + geom_smooth(aes(group=subject), se=FALSE, alpha=0.2) + geom_smooth(aes(color=group), linewidth=1.2)` — only if individual trajectories are informative; otherwise just group-level fit over points.
+- **Post-hoc contrasts**: `geom_pointrange(aes(y=estimate, ymin=conf.low, ymax=conf.high))` — point + CI bars, nothing else.
 
 **Figure naming convention:** Figures must be labeled relative to the R script that generates them. A script with numeric prefix `NN` (e.g., `01_lobar_gam.R`, `03-cognitive.Rmd`) produces figures labeled `NNa`, `NNb`, `NNc`, etc. in order. For example:
 - `01_lobar_gam.R` → `fig_01a_raw_lobar.pdf`, `fig_01b_gam_lobar.pdf`, `fig_01c_lobar_diffs.pdf`
 - `03-cognitive.Rmd` → `fig_03a_cognitive_raw.pdf`, `fig_03b_cognitive_model.pdf`
 
 This keeps figures traceable to their source script and orders them consistently across the manuscript.
-
-**Examples by model type:**
-
-- **GAM**: Plot 1 = raw y vs x with points colored by group. Plot 2 = same points + `mgcv` smooth curves with confidence ribbons.
-- **Mixed model**: Plot 1 = raw outcome by time/group (spaghetti or boxplot). Plot 2 = same raw data + emmeans/predicted values with CIs.
-- **ANOVA/group comparison**: Plot 1 = jittered points by group. Plot 2 = same points + estimated marginal means with error bars.
 
 ## Model Diagnostics
 
@@ -245,41 +321,174 @@ gam.check(fit)    # residual plots + basis dimension checks
 concurvity(fit)   # analogue of collinearity for smooth terms
 ```
 
-## Reading Data
+## Reading and Preparing Data
 
 ```r
-library(readr)
+library(tidyverse)
 
-df <- read_csv("data.csv")
+df <- read_csv("data.csv") |>
+  janitor::clean_names() |>
+  mutate(
+    group = factor(group),
+    age_centered = age - mean(age, na.rm = TRUE)
+  ) |>
+  filter(!is.na(outcome))
 
-# Or for Excel
+# Reshaping for longitudinal/repeated measures
+df_long <- df |>
+  pivot_longer(
+    cols = starts_with("score_"),
+    names_to = "timepoint",
+    values_to = "score"
+  )
+
+# Nested operations per group
+df_summary <- df |>
+  group_by(group, region) |>
+  summarise(
+    n = n(),
+    mean_val = mean(value, na.rm = TRUE),
+    se_val = sd(value, na.rm = TRUE) / sqrt(n()),
+    .groups = "drop"
+  )
+
+# For Excel
 library(readxl)
-df <- read_excel("data.xlsx", sheet=1)
+df <- read_excel("data.xlsx", sheet = 1)
 ```
 
-## Reporting Results
+## Reporting Results — gt Tables
 
-Structure model output for manuscripts:
+**Every model must produce gt tables for statistics and diagnostics, saved alongside figures.**
+
+After fitting any linear model (lm, lmer, gam, glmer, etc.), produce publication-quality tables using `gt` and save them as both `.pdf` and `.png` files. Tables follow the same naming convention as figures.
+
+**Table naming convention:** Same as figures — a script `NN_*.R` produces tables labeled `tbl_NNa`, `tbl_NNb`, etc. For example:
+- `01_lobar_gam.R` → `tbl_01a_fixed_effects.pdf`, `tbl_01b_model_diagnostics.pdf`
+- `03_cognitive_gam.R` → `tbl_03a_smooth_terms.pdf`, `tbl_03b_pairwise.pdf`
+
+Save tables to the same output directory as figures (e.g., `output/`).
+
+### Required tables after model fitting
+
+1. **Fixed effects / coefficients table** — estimates, CIs, test statistics, p-values
+2. **Model diagnostics table** — R², AIC/BIC, sample size, random effects variance (as applicable)
+3. **Post-hoc / contrasts table** (when applicable) — pairwise comparisons with adjusted p-values
+
+### Fixed effects table (lmer / lm)
 
 ```r
+library(tidyverse)
 library(broom.mixed)
+library(gt)
 
-# Tidy fixed effects table
-tidy(fit, effects="fixed", conf.int=TRUE)
+tbl_fixed <- tidy(fit, effects = "fixed", conf.int = TRUE) |>
+  mutate(
+    across(c(estimate, conf.low, conf.high, statistic), \(x) round(x, 3)),
+    p.value = scales::pvalue(p.value)
+  ) |>
+  select(Term = term, Estimate = estimate, `95% CI Low` = conf.low,
+         `95% CI High` = conf.high, `t / z` = statistic, `p` = p.value) |>
+  gt() |>
+  tab_header(title = "Fixed Effects") |>
+  tab_options(table.font.size = px(12))
 
-# Random effects
-tidy(fit, effects="ran_pars")
-
-# For APA-style: report F/t, df, p, effect size
-# lmerTest provides Satterthwaite df in summary()
+gtsave(tbl_fixed, "output/tbl_01a_fixed_effects.pdf")
+gtsave(tbl_fixed, "output/tbl_01a_fixed_effects.png", vwidth = 800)
 ```
+
+### GAM smooth terms table
+
+```r
+tbl_smooth <- tidy(fit, parametric = FALSE) |>
+  mutate(
+    across(c(edf, ref.df, statistic), \(x) round(x, 2)),
+    p.value = scales::pvalue(p.value)
+  ) |>
+  select(Term = term, EDF = edf, `Ref. df` = ref.df,
+         F = statistic, `p` = p.value) |>
+  gt() |>
+  tab_header(title = "Smooth Terms")
+
+gtsave(tbl_smooth, "output/tbl_01b_smooth_terms.pdf")
+gtsave(tbl_smooth, "output/tbl_01b_smooth_terms.png", vwidth = 800)
+```
+
+### Model diagnostics table
+
+```r
+library(performance)
+
+diag_df <- tibble(
+  Metric = c("R² (marginal)", "R² (conditional)", "AIC", "BIC", "ICC", "N obs", "N groups"),
+  Value = c(
+    round(r2(fit)$R2_marginal, 3),
+    round(r2(fit)$R2_conditional, 3),
+    round(AIC(fit), 1),
+    round(BIC(fit), 1),
+    round(icc(fit)$ICC_adjusted, 3),
+    nobs(fit),
+    ngrps(fit)
+  )
+)
+
+tbl_diag <- diag_df |>
+  gt() |>
+  tab_header(title = "Model Diagnostics")
+
+gtsave(tbl_diag, "output/tbl_01c_diagnostics.pdf")
+gtsave(tbl_diag, "output/tbl_01c_diagnostics.png", vwidth = 600)
+```
+
+### Post-hoc contrasts table
+
+```r
+library(emmeans)
+
+tbl_contrasts <- pairs(emmeans(fit, ~ group), adjust = "tukey") |>
+  as_tibble() |>
+  mutate(
+    across(c(estimate, SE, t.ratio), \(x) round(x, 3)),
+    p.value = scales::pvalue(p.value)
+  ) |>
+  gt() |>
+  tab_header(title = "Pairwise Comparisons (Tukey-adjusted)")
+
+gtsave(tbl_contrasts, "output/tbl_01d_pairwise.pdf")
+gtsave(tbl_contrasts, "output/tbl_01d_pairwise.png", vwidth = 800)
+```
+
+### Using gtsummary for quick model tables
+
+```r
+library(gtsummary)
+
+# One-line model summary table
+tbl_regression(fit, exponentiate = FALSE) |>
+  bold_p() |>
+  as_gt() |>
+  gtsave("output/tbl_01a_regression.pdf")
+```
+
+### gt formatting conventions
+
+- Use `tab_header()` with a descriptive title
+- Use `tab_options(table.font.size = px(12))` for readable PDF output
+- Use `fmt_number(decimals = 3)` for numeric columns when not pre-rounded
+- Use `tab_footnote()` for method details (e.g., "Satterthwaite degrees of freedom")
+- Save both `.pdf` (for manuscript/LaTeX) and `.png` (for quick preview / slides)
+- Set `vwidth = 600–1000` in `gtsave(..., .png)` to control table width
 
 ## When Python Is Acceptable
 
-- Quick descriptive statistics (mean, SD, counts) — pandas is fine
-- Simple t-tests or chi-square — scipy.stats is fine
 - Machine learning / prediction (not inference) — scikit-learn is appropriate
-- Data wrangling before modeling — pandas/polars, then pass CSV to R
+- Data pipelines that feed into R (e.g., SuStaIn output, NIfTI extraction) — pandas/polars for ETL, then pass CSV to R
+
+**Do NOT use Python for:**
+- Descriptive statistics, summaries, or counts — use `dplyr::summarise()`
+- Data reshaping or pivoting — use `tidyr::pivot_longer()` / `pivot_wider()`
+- String manipulation on data columns — use `stringr`
+- Any data wrangling that precedes or follows a model — keep it all in R/tidyverse
 
 ## Package Installation
 
