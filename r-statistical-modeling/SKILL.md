@@ -302,8 +302,9 @@ Both plots should use the same axis scales and structure so they are directly co
 **Avoid** unless the data genuinely requires it:
 - Spaghetti plots (use only for longitudinal data where individual trajectories matter)
 - Faceted multi-panel grids (use only when comparing across >2 grouping variables)
-- Density ridgelines, heatmaps, or complex geoms
+- Density ridgelines or complex geoms
 - Heavy annotation, arrows, or text labels on plots
+- **Heatmaps** — almost never use heatmaps. Instead, produce a figure or table that displays raw data (if possible) or raw data + model estimate with effect sizes. The only acceptable use of a heatmap is for extremely low-count categorical data (e.g., a small contingency table), and in that case the precise count must be annotated on top of each cell (`geom_text()`). For continuous outcomes across many regions/variables, prefer dot plots, forest plots, or `gt` tables with effect sizes.
 
 **Guiding principles:**
 - One geom layer for data, one for the model fit. Two layers is usually enough.
