@@ -192,6 +192,22 @@ anova(fit_reduced, fit_full)   # likelihood ratio test
 AICc(fit_full, fit_reduced)    # corrected AIC
 ```
 
+## Visualization Requirements
+
+**Every statistical analysis must produce two plots:**
+
+1. **Raw data plot** — Show the raw data going into the analysis. This means the actual observed values, plotted in a way that conveys the structure of the data (e.g., scatter plots, spaghetti plots for longitudinal data, jittered points by group). No model fits, no smoothers — just the data.
+
+2. **Result overlay plot** — Show the analysis result (fitted values, smooth curves, predicted means, confidence bands) overlaid on top of the same raw data. The reader should be able to see both what the data look like and what the model estimates.
+
+Both plots should use the same axis scales and structure so they are directly comparable. Save them as separate files (e.g., `fig_raw_data.pdf` and `fig_model_overlay.pdf`), or as panels in a combined figure when appropriate.
+
+**Examples by model type:**
+
+- **GAM**: Plot 1 = raw y vs x with points colored by group. Plot 2 = same points + `mgcv` smooth curves with confidence ribbons.
+- **Mixed model**: Plot 1 = raw outcome by time/group (spaghetti or boxplot). Plot 2 = same raw data + emmeans/predicted values with CIs.
+- **ANOVA/group comparison**: Plot 1 = jittered points by group. Plot 2 = same points + estimated marginal means with error bars.
+
 ## Model Diagnostics
 
 ### For lmer/glmer models
