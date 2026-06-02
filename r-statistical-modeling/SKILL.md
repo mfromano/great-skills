@@ -132,6 +132,7 @@ Then add to `.mcp.json` (project-level) or `~/.claude/settings.json` (global):
 Reload/restart Claude Code after adding the entry. The `-32000` error on connection means the server process failed to start — most often because `btw` is not installed.
 
 **When to use r-btw tools instead of `Rscript`:**
+- **R documentation lookups** — Always use r-btw to look up R function signatures, package documentation, argument defaults, and style guide references. Prefer r-btw over web searches for any R/tidyverse/stats documentation question.
 - Inspecting a data frame's structure, column types, or summary stats before fitting a model
 - Checking a fitted model object (coefficients, random effects, convergence warnings) after fitting
 - Looking up R function or package documentation mid-task
@@ -513,6 +514,82 @@ tbl_regression(fit, exponentiate = FALSE) |>
 - Use `tab_footnote()` for method details (e.g., "Satterthwaite degrees of freedom")
 - Save both `.pdf` (for manuscript/LaTeX) and `.png` (for quick preview / slides)
 - Set `vwidth = 600–1000` in `gtsave(..., .png)` to control table width
+
+## Code Style — Tidyverse Style Guide
+
+**All R code must conform to the [Tidyverse Style Guide](https://style.tidyverse.org/).**
+
+### Naming
+- **Files:** lowercase, use `_` or `-` as separators, `.R` extension. Zero-pad numeric prefixes (`01_`, `02_`). No spaces or special characters.
+- **Objects:** `snake_case` only. Variables are nouns, functions are verbs. Never use `.` in names (reserved for S3 dispatch). Never shadow base functions (`c`, `mean`, `T`, `F`).
+
+### Spacing and Operators
+- Space after commas, never before: `x[, 1]`
+- Spaces around infix operators (`<-`, `==`, `+`, `|>`), except `::`, `$`, `@`, `[`, `[[`, `^`, unary `-`/`+`
+- No spaces inside parentheses: `mean(x, na.rm = TRUE)`
+- Space before `(` for control flow: `if (x > 0) {`
+- Use `<-` for assignment, never `=`
+
+### Line Length and Indentation
+- Maximum 80 characters per line
+- Indent with 2 spaces (never tabs)
+- If function arguments don't fit on one line, put each on its own line, indented:
+  ```r
+  fit <- gam(
+    y ~ s(age, by = group) + s(subject, bs = "re"),
+    data = df_model,
+    method = "REML"
+  )
+  ```
+
+### Pipes
+- Use base pipe `|>` (not `%>%`)
+- `|>` has a space before it and is followed by a newline
+- Each step indented 2 spaces:
+  ```r
+  df |>
+    filter(!is.na(outcome)) |>
+    mutate(age_z = scale(age)[, 1]) |>
+    group_by(group) |>
+    summarise(mean_val = mean(outcome), .groups = "drop")
+  ```
+
+### Braces and Control Flow
+- `{` is always the last character on its line
+- `}` is always the first character on its line
+- Contents indented 2 spaces
+- `else` on same line as closing `}`: `} else {`
+- Loop/if bodies always use braces (even one-liners)
+- Use `&&`/`||` in `if` conditions (never `&`/`|`)
+
+### Functions
+- Only use `return()` for early returns; rely on implicit last-expression return
+- Multi-line definitions: arguments each on own line, indented 2 spaces
+- Use `\(x)` lambda for short anonymous functions; `function(x)` for multi-line
+
+### ggplot2
+- `+` has a space before and is followed by a newline
+- Layers indented 2 spaces below `ggplot()`:
+  ```r
+  df |>
+    ggplot(aes(x = age, y = value, color = group)) +
+    geom_point(alpha = 0.4) +
+    geom_smooth(method = "gam") +
+    theme_minimal()
+  ```
+- Do not manipulate data inside `ggplot()` — do it in the pipe before
+
+### Comments
+- `# ` (hash + space) to start
+- Explain "why", not "what"
+- Use `# Section name ----` for file sections
+
+### Strings and Literals
+- Double quotes `"` for strings
+- `TRUE`/`FALSE`, never `T`/`F`
+
+### Tooling
+- Use `styler` for automated reformatting and `lintr` for style checking
 
 ## When Python Is Acceptable
 
