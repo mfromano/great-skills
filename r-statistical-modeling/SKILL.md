@@ -26,6 +26,41 @@ hooks:
 
 R's statistical ecosystem (mgcv, lme4, lmerTest, nlme, emmeans) is more mature, better tested, and produces publication-ready output for inference. Python tools (statsmodels, pingouin) are acceptable for simple descriptive statistics or quick t-tests, but for anything involving mixed effects, splines, GAMs, or complex random-effect structures, R is the correct tool.
 
+## Model Specification Workflow
+
+**Before writing any model code, propose the formula and ask for modifications.**
+
+When a statistical analysis is requested:
+1. State the recommended model formula in R syntax (e.g., `outcome ~ s(age, by = group) + covariate + (1 | subject)`)
+2. Explain briefly why this specification is appropriate (family, link, random effects structure, smooth terms)
+3. Ask the user whether they want any modifications before proceeding
+
+Do not fit the model until the user confirms or adjusts the specification. This prevents wasted iterations on the wrong model structure.
+
+## Consistency Within Analysis Folders
+
+**All statistical models within a single folder/script suite must be harmonized.**
+
+- Use the same input dataset across all models in the folder (load once, subset as needed)
+- Use consistent random-effects structures (e.g., if one model has `(1 | subject)`, all models in the suite should unless there is a specific reason to differ)
+- Use the same covariates / confound adjustment strategy across models
+- Use the same filtering criteria (inclusion/exclusion) so sample sizes are comparable
+- Use the same variable transformations (centering, scaling, factor coding)
+
+When adding a new model to an existing analysis folder, first read the other scripts in the folder to identify the established conventions and match them.
+
+## Data Preparation — Single Comprehensive CSV
+
+**When curating data in Python for R analysis, compile a single comprehensive CSV rather than multiple analysis-specific files.**
+
+- One CSV should contain all variables needed across the full analysis suite (outcomes, predictors, covariates, grouping variables, IDs)
+- R scripts then `select()` or `filter()` from this master file as needed
+- This ensures consistent sample definitions across analyses and avoids version drift between files
+- Name the file descriptively (e.g., `lobar_metrics_long.csv` not `data_for_gam1.csv`)
+- Include all relevant metadata columns (subject ID, session, group, demographics) even if not all models use them
+
+Only create separate CSVs when data genuinely come from different sources or pipelines that cannot be meaningfully joined.
+
 ## When This Skill Applies
 
 - Fitting any regression model (linear, logistic, Poisson, etc.)
