@@ -10,13 +10,13 @@ hooks:
     - matcher: "Edit|Write"
       hooks:
         - type: command
-          command: "/home/mromano/.claude/skills/r-statistical-modeling/hooks/r-post-edit.sh"
+          command: "hooks/r-post-edit.sh"
           timeout: 10000
   PreToolUse:
     - matcher: "mcp__r-btw"
       hooks:
         - type: command
-          command: "/home/mromano/.claude/skills/r-statistical-modeling/hooks/r-session-summary.sh"
+          command: "hooks/r-session-summary.sh"
           timeout: 6000
 ---
 

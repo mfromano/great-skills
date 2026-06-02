@@ -3,9 +3,9 @@
 # Reports what's available in the current R workspace (.RData or renv)
 set -euo pipefail
 
-RSCRIPT="/data/romano1/miniconda3/bin/Rscript"
-if [[ ! -x "$RSCRIPT" ]]; then
-  RSCRIPT="Rscript"
+RSCRIPT="$(command -v Rscript 2>/dev/null || true)"
+if [[ -z "$RSCRIPT" ]]; then
+  exit 0
 fi
 
 PROJECT_DIR="${CLAUDE_PROJECT_DIR:-$(pwd)}"

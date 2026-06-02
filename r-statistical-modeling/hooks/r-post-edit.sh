@@ -10,9 +10,9 @@ if [[ ! "$FILE_PATH" =~ \.R$ ]]; then
   exit 0
 fi
 
-RSCRIPT="/data/romano1/miniconda3/bin/Rscript"
-if [[ ! -x "$RSCRIPT" ]]; then
-  RSCRIPT="Rscript"
+RSCRIPT="$(command -v Rscript 2>/dev/null || true)"
+if [[ -z "$RSCRIPT" ]]; then
+  exit 0
 fi
 
 # Step 1: Syntax check (fast, no side effects)
