@@ -200,7 +200,13 @@ AICc(fit_full, fit_reduced)    # corrected AIC
 
 2. **Result overlay plot** — Show the analysis result (fitted values, smooth curves, predicted means, confidence bands) overlaid on top of the same raw data. The reader should be able to see both what the data look like and what the model estimates.
 
-Both plots should use the same axis scales and structure so they are directly comparable. Save them as separate files (e.g., `fig_raw_data.pdf` and `fig_model_overlay.pdf`), or as panels in a combined figure when appropriate.
+Both plots should use the same axis scales and structure so they are directly comparable. Save them as separate files or as panels in a combined figure when appropriate.
+
+**Figure naming convention:** Figures must be labeled relative to the R script that generates them. A script with numeric prefix `NN` (e.g., `01_lobar_gam.R`, `03-cognitive.Rmd`) produces figures labeled `NNa`, `NNb`, `NNc`, etc. in order. For example:
+- `01_lobar_gam.R` → `fig_01a_raw_lobar.pdf`, `fig_01b_gam_lobar.pdf`, `fig_01c_lobar_diffs.pdf`
+- `03-cognitive.Rmd` → `fig_03a_cognitive_raw.pdf`, `fig_03b_cognitive_model.pdf`
+
+This keeps figures traceable to their source script and orders them consistently across the manuscript.
 
 **Examples by model type:**
 
