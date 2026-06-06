@@ -358,6 +358,74 @@ gam.check(fit)    # residual plots + basis dimension checks
 concurvity(fit)   # analogue of collinearity for smooth terms
 ```
 
+## Data Manipulation Logging
+
+**Every data manipulation step must produce a human-readable log message written to a log file.**
+
+After any operation that changes the shape or content of a data frame (filtering, joining, mutating, pivoting, deduplicating, imputing, removing NAs), write a message that reports:
+
+1. **What was done** — in plain English, not code
+2. **How counts or distributions changed** — rows before/after, rows dropped, new column ranges, group sizes
+
+### Setup
+
+At the top of every R script, initialize a log file named after the script:
+
+```r
+log_file <- sub("\\.R$", ".log", basename(sys.frame(1)$ofile %||% "script.R"))
+if (file.exists(log_file)) file.remove(log_file)
+
+log_msg <- function(...) {
+  msg <- paste0("[", format(Sys.time(), "%H:%M:%S"), "] ", ...)
+  cat(msg, "\n", file = log_file, append = TRUE)
+  cli::cli_alert_info(msg)
+}
+```
+
+This writes to the log file AND echoes to the console for interactive debugging.
+
+### Pattern
+
+```r
+n_before <- nrow(df)
+df <- df |>
+  filter(age >= 18, !is.na(tau_suvr))
+log_msg("Filtered to adults with non-missing tau: ", n_before, " -> ", nrow(df), " rows (", n_before - nrow(df), " dropped)")
+
+df <- df |>
+  left_join(demographics, by = "subject_id")
+log_msg("Joined demographics: ", nrow(df), " rows, ", sum(is.na(df$education)), " missing education")
+
+df <- df |>
+  mutate(age_z = scale(age)[, 1])
+log_msg("Centered age: mean = ", round(mean(df$age_z), 2),
+        ", SD = ", round(sd(df$age_z), 2),
+        ", range = [", round(min(df$age_z), 1), ", ", round(max(df$age_z), 1), "]")
+```
+
+### Requirements
+
+- Every script produces a `.log` file alongside it (e.g., `01_lobar_gam.R` → `01_lobar_gam.log`)
+- Log **every** filter, join, pivot, mutate that changes row count or adds/removes columns
+- For filters: always report rows before, rows after, and rows dropped
+- For joins: report resulting row count and any new `NA` introduced
+- For group operations: report group sizes (`n per group: min/median/max`)
+- For outlier removal or winsorizing: report how many values were affected
+- For pivots: report old dimensions → new dimensions
+- Messages must be understandable without reading the code — someone reviewing the log file alone should know exactly what happened to the data
+
+### Example log file content
+
+```
+[09:14:01] Loaded ADNI longitudinal data: 1847 rows x 42 cols
+[09:14:01] Filtered to amyloid-positive participants: 1847 -> 623 rows (1224 dropped)
+[09:14:01] Removed subjects with < 2 visits: 623 -> 581 rows (42 dropped, 14 subjects)
+[09:14:02] Joined Braak staging: 581 rows, 3 missing braak_stage
+[09:14:02] Pivoted to long format (6 ROIs): 581 x 42 -> 3486 x 38
+[09:14:02] Centered age: mean = 0.00, SD = 1.00, range = [-2.4, 3.1]
+[09:14:02] Group sizes -- CN: 89, MCI: 104, AD: 53 (n subjects)
+```
+
 ## Reading and Preparing Data
 
 ```r
@@ -591,6 +659,24 @@ tbl_regression(fit, exponentiate = FALSE) |>
 
 ### Tooling
 - Use `styler` for automated reformatting and `lintr` for style checking
+
+## Simplify Workflow for R Projects
+
+**When `/simplify` is invoked on R code, follow this three-step regression-tested workflow:**
+
+1. **Baseline capture** — Run all R scripts in the project sequentially (ordered by numeric prefix: `01_*.R`, `02_*.R`, etc.). Capture all output artifacts: figures, tables, printed summaries, saved CSVs. This is the ground truth.
+
+2. **Simplify** — Refactor functions and code to be as concise and human-auditable as possible. Goals:
+   - Eliminate unnecessary intermediate variables
+   - Collapse redundant logic
+   - Shorten function bodies without obscuring intent
+   - Remove dead code paths
+   - Prefer idiomatic tidyverse over verbose base-R equivalents
+   - Keep every function short enough to audit in a single screen (~30 lines max)
+
+3. **Regression verification** — Rerun all R scripts in the same sequential order. Compare all output artifacts to the baseline. Every figure, table, and numeric result must be **byte-identical** (for deterministic output) or **numerically equivalent** (for stochastic models with set seeds). If any output differs, revert the offending change and retry.
+
+**The simplify is only complete when step 3 confirms identical output.** Do not report success without running the full regression pass.
 
 ## When Python Is Acceptable
 
