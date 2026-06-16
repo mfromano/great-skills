@@ -1,6 +1,3 @@
-[submodule "superpowers"]
-	path = superpowers
-	url = git@github.com:obra/superpowers
 [submodule "lab-skills"]
 	path = lab-skills
 	url = git@git.ucsf.edu:rauschecker-sugrue-labs/lab-skills.git
