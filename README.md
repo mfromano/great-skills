@@ -41,6 +41,7 @@ These ones I made myself. With my own hands. Like a craft.
 | `pydicom` | Python library for working with DICOM (Digital Imaging and Communications in Medicine) files. Use this skill when rea... | K-Dense Inc. |
 | `seaborn` | Statistical visualization with pandas integration. Use for quick exploration of distributions, relationships, and cat... | K-Dense Inc. |
 | `zotero-enrich` | Enrich Obsidian Zotero literature notes with PDF links, LLM summaries, and extracted figures. Run after adding new pa... | — |
+| `zotero-import` | Use when adding a paper to Zotero by DOI or from a recently downloaded PDF. Triggers on "import paper", "add to zoter... | — |
 
 ---
 
@@ -51,7 +52,6 @@ These came from other places. Like when you find a really good mix tape that isn
 | Skill | Description | Author |
 |-------|-------------|--------|
 | `python-data-wrangling` | Use when writing, reviewing, or editing any Python code in this project. Covers style, ETL pipelines, data extraction... | — |
-| `r-analysis-studio` | Interactive analysis design — propose, run, interpret, and optionally write statistical analyses one at a time. Runs ... | Michael Romano |
+| `r-notebook` | Interactive R analysis in .Rmd/.qmd notebooks — walk through existing chunks, design new analyses, execute code, and ... | Michael Romano |
 | `r-statistical-modeling` | Use R (mgcv, lme4, lmerTest, nlme, emmeans) instead of Python for all statistical modeling tasks. Triggers when fitti... | Michael Romano |
-| `r-walkthrough` | Walk through an R script section-by-section using a persistent interactive R session (btw MCP). Source sections incre... | — |
 
