@@ -22,9 +22,30 @@ When invoked, run the enrichment script that adds PDF links, Claude-generated su
 - Script: `~/research/obsidian-tools/enrich_obsidian_notes.py`
 - Batch importer: `~/research/obsidian-tools/zotero_to_obsidian.py`
 - Git repo: `~/research/obsidian-tools/` (track with git)
-- Vault: `/Users/mromano/Documents/Obsidian Vault/Papers/ad_dti_study/`
+- Vault: `/Users/mromano/Documents/Obsidian Vault/`
+  - Default collection folder: `Papers/ad_dti_study/`
+  - Radiology collection folder: `Radiology/`
 - Zotero DB: `~/Zotero/zotero.sqlite`
 - Credentials: sourced automatically from `~/.config/settings.sh`
+
+## Collections
+
+Both scripts accept `--collection <name>` to target a Zotero group and its vault folder:
+
+| `--collection` | Zotero source                          | Vault folder         |
+|----------------|----------------------------------------|----------------------|
+| `ad_dti_study` | ad_dti_study group                     | `Papers/ad_dti_study` (default) |
+| `adstudy`      | ADstudy group                          | `Papers/adstudy`     |
+| `gliosarcoma`  | gliosarcoma group                      | `Papers/gliosarcoma` |
+| `radiology`    | "Radiology" collection in *My Library* | `Radiology`          |
+
+Note: `radiology` is a **collection inside the personal "My Library"** (not a group library);
+it filters by Zotero `collectionID`. To batch-import + enrich it:
+```bash
+python3 ~/research/obsidian-tools/zotero_to_obsidian.py --collection radiology
+python3 ~/research/obsidian-tools/enrich_obsidian_notes.py --collection radiology
+```
+`enrich_obsidian_notes.py` also accepts `--notes-dir <path>` to target an arbitrary folder.
 
 ## Workflow
 

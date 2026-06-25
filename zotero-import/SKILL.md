@@ -29,10 +29,21 @@ python3 ~/research/obsidian-tools/import_paper.py --pdf /path/to.pdf # explicit 
 **Choose library:**
 ```bash
 --library personal       # user's personal Zotero library
---library ad_dti_study   # default group
---library gliosarcoma
---library adstudy
---library adrd_radiology
+--library ad_dti_study   # default group → vault folder Papers/ad_dti_study
+--library gliosarcoma    # → vault folder Papers/gliosarcoma
+--library adstudy        # → vault folder Papers/adstudy
+```
+
+Each library writes its note into its own vault folder and tags it with the
+collection name.
+
+**Radiology note:** the "Radiology" set is a *collection inside My Library*, not a group
+library, so single-paper `import_paper.py` (which adds to a Zotero library, not a specific
+collection) does not target it directly. Use the batch importer to (re)populate the
+`Radiology/` vault folder from that collection:
+```bash
+python3 ~/research/obsidian-tools/zotero_to_obsidian.py --collection radiology
+python3 ~/research/obsidian-tools/enrich_obsidian_notes.py --collection radiology
 ```
 
 **Other flags:**
