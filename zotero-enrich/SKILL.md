@@ -22,7 +22,8 @@ When invoked, run the enrichment script that adds PDF links, Claude-generated su
 - Script: `~/research/obsidian-tools/enrich_obsidian_notes.py`
 - Batch importer: `~/research/obsidian-tools/zotero_to_obsidian.py`
 - Git repo: `~/research/obsidian-tools/` (track with git)
-- Vault: `/Users/mromano/Documents/Obsidian Vault/`
+- Vault: `/Users/mromano/Obsidian/` (local disk; moved off the OneDrive-synced
+  `~/Documents/Obsidian Vault` path, which caused cloud-only files to evict/hang)
   - Default collection folder: `Papers/ad_dti_study/`
   - Radiology collection folder: `Radiology/`
 - Zotero DB: `~/Zotero/zotero.sqlite`

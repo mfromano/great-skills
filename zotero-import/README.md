@@ -7,9 +7,10 @@ folder from a Zotero collection, and using the Obsidian vault as a **RAG**.
 
 ## Vault & Zotero facts
 
-- **Active vault:** `/Users/mromano/Documents/Obsidian Vault` (same files as the
-  `…/OneDrive-UCSF/Documents/Obsidian Vault` path). The Obsidian **MCP** server
-  is connected to a *different* vault (`~/research/fw-tau-cascade`) — not this one.
+- **Active vault:** `/Users/mromano/Obsidian` (local disk). Moved here off the
+  OneDrive-synced `~/Documents/Obsidian Vault` path, where cloud-only files would
+  evict locally and stall PDF reads. The Obsidian **MCP** server is connected to a
+  *different* vault (`~/research/fw-tau-cascade`) — not this one.
 - **Group library vs. collection:** a Zotero *group library* (own libraryID,
   has a group_id) is not the same as a *collection* inside the personal
   "My Library" (libraryID 1, filtered by collectionID). The user's **Radiology**
