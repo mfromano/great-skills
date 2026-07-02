@@ -38,6 +38,7 @@ These ones I made myself. With my own hands. Like a craft.
 |-------|-------------|--------|
 | `auto-commit` | Commit and push changes to the current branch. Stages relevant files, drafts a commit message from the diff, and push... | — |
 | `matplotlib` | Low-level plotting library for full customization. Use when you need fine-grained control over every plot element, cr... | K-Dense Inc. |
+| `mri-protocol` | Retrieve a UCSF MRI protocol from a plain-language description using the local mri-rag RAG, and optionally compose on... | — |
 | `pydicom` | Python library for working with DICOM (Digital Imaging and Communications in Medicine) files. Use this skill when rea... | K-Dense Inc. |
 | `seaborn` | Statistical visualization with pandas integration. Use for quick exploration of distributions, relationships, and cat... | K-Dense Inc. |
 | `zotero-enrich` | Enrich Obsidian Zotero literature notes with PDF links, LLM summaries, and extracted figures. Run after adding new pa... | — |
@@ -54,4 +55,5 @@ These came from other places. Like when you find a really good mix tape that isn
 | `python-data-wrangling` | Use when writing, reviewing, or editing any Python code in this project. Covers style, ETL pipelines, data extraction... | — |
 | `r-notebook` | Interactive R analysis in .Rmd/.qmd notebooks — walk through existing chunks, design new analyses, execute code, and ... | Michael Romano |
 | `r-statistical-modeling` | Use R (mgcv, lme4, lmerTest, nlme, emmeans) instead of Python for all statistical modeling tasks. Triggers when fitti... | Michael Romano |
+| `r-tdd` | Test-driven development for R code — write a failing testthat test that specifies intent, then the minimum code to pa... | Michael Romano |
 
