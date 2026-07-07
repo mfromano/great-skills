@@ -37,13 +37,10 @@ These ones I made myself. With my own hands. Like a craft.
 | Skill | Description | Author |
 |-------|-------------|--------|
 | `auto-commit` | Commit and push changes to the current branch. Stages relevant files, drafts a commit message from the diff, and push... | — |
+| `intention-verified-code` | > | Michael Romano |
 | `matplotlib` | Low-level plotting library for full customization. Use when you need fine-grained control over every plot element, cr... | K-Dense Inc. |
-| `mri-protocol` | Retrieve a UCSF MRI protocol from a plain-language description using the local mri-rag RAG, and optionally compose on... | — |
-| `obsidian-rag` | Query the user's Obsidian library by plain-language description using the local obsidian-rag toolkit — verbatim, zero... | — |
 | `pydicom` | Python library for working with DICOM (Digital Imaging and Communications in Medicine) files. Use this skill when rea... | K-Dense Inc. |
 | `seaborn` | Statistical visualization with pandas integration. Use for quick exploration of distributions, relationships, and cat... | K-Dense Inc. |
-| `zotero-enrich` | Enrich Obsidian Zotero literature notes with PDF links, LLM summaries, and extracted figures. Run after adding new pa... | — |
-| `zotero-import` | Use when adding a paper to Zotero by DOI or from a recently downloaded PDF. Triggers on "import paper", "add to zoter... | — |
 
 ---
 
