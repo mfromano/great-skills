@@ -38,6 +38,7 @@ These ones I made myself. With my own hands. Like a craft.
 |-------|-------------|--------|
 | `auto-commit` | Commit and push changes to the current branch. Stages relevant files, drafts a commit message from the diff, and push... | — |
 | `matplotlib` | Low-level plotting library for full customization. Use when you need fine-grained control over every plot element, cr... | K-Dense Inc. |
+| `obsidian` | > | — |
 | `pydicom` | Python library for working with DICOM (Digital Imaging and Communications in Medicine) files. Use this skill when rea... | K-Dense Inc. |
 | `seaborn` | Statistical visualization with pandas integration. Use for quick exploration of distributions, relationships, and cat... | K-Dense Inc. |
 
@@ -69,6 +70,7 @@ These came from other places. Like when you find a really good mix tape that isn
 | `r-tdd` | Test-driven development for R code — write a failing testthat test that specifies intent, then the minimum code to pa... | Michael Romano |
 | `skill-creator` | Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a... | — |
 | `tag-taxonomy` | > | — |
+| `tdd` | > | Michael Romano |
 | `vault-skill-factory` | > | — |
 | `wiki-agent` | > | — |
 | `wiki-capture` | > | — |
