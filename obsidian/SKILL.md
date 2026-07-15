@@ -8,6 +8,8 @@ description: >
   (exact verbatim source retrieval + MRI protocol composition), wiki-query (GraphRAG
   synthesis over the compiled wiki), and qmd (fast semantic scan). This is a thin router
   — it points at the right system; the detailed docs live in each spoke skill.
+  Every query is also archived as an Obsidian-formatted markdown file with inline
+  images under the vault's `_archives/` directory.
 ---
 
 # Obsidian — Query Router
@@ -17,6 +19,45 @@ kind of question. They are scattered across scopes (obsidian-rag is project-scop
 `~/obsidian-rag`; the `wiki-*` family and `qmd` are global), so this hub is the single
 entry point that knows all three exist. **Pick by what the user is asking for**, then
 follow the linked spoke skill for the full workflow.
+
+## Always archive the query (with inline images)
+
+**Every** query run through this router MUST be written to an Obsidian-formatted
+markdown file under `/Users/mromano/Obsidian/Radiology/_archives/` so the user can open
+it in Obsidian and see the source figures rendered inline. This is not optional — do it
+on every query, even quick ones.
+
+The obsidian-rag toolkit already produces exactly this: its `--vault-md PATH` flag writes
+a vault markdown file with `[[note#heading]]` source wikilinks **and every result's
+figures embedded as absolute-path image embeds** that resolve inline in Obsidian. Use it:
+
+```bash
+cd ~/obsidian-rag && uv run search.py "<the user's query>" \
+  --vault-md "/Users/mromano/Obsidian/Radiology/_archives/<slug>-<YYYY-MM-DD>.md"
+```
+
+- `<slug>` = a short kebab-case slug of the query (e.g. `gamma-knife-post-treatment`).
+  `<YYYY-MM-DD>` = today's date. Keep names unique so archives accumulate rather than
+  overwrite; if a name would collide, append `-2`, `-3`, ….
+- This single command both **answers** the query (prints results to you) and **archives**
+  it with inline images — so for obsidian-rag queries you get archiving for free.
+- Add `--collection <name>` / `-k <n>` / `--mode <mode>` as the query warrants; the
+  `--vault-md` flag composes with all of them.
+- **qmd / wiki-query queries:** those tools don't emit vault markdown. When you route to
+  one of them, ALSO run the obsidian-rag `--vault-md` command above on the same query so
+  an image-bearing archive still lands in `_archives/`. If obsidian-rag returns nothing
+  useful, write the archive file yourself in the same format (H1 title with query + date,
+  per-result `## N. [collection] heading`, a `**Source:** [[note#heading]]` line, the
+  verbatim text, then figure embeds).
+- **Image embed syntax — this matters:** Obsidian only renders on-disk figures via
+  **wikilink embeds** `![[vault-relative/path/to/fig.jpeg]]` (path relative to the vault
+  root `/Users/mromano/Obsidian/Radiology/`, POSIX slashes, spaces kept literal — no
+  angle brackets). It does **NOT** render `![alt](</Users/.../abs/path>)` markdown-image
+  links — it treats the target as vault-relative and fails to resolve an absolute path,
+  so images silently don't appear. The `--vault-md` export emits the wikilink form
+  automatically; only matters when you hand-write a fallback archive.
+
+After running, tell the user the archive path so they can open it in Obsidian.
 
 ## Routing table
 
